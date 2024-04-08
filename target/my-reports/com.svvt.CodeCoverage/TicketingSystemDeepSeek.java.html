@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TicketingSystemDeepSeek.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">CodeCoverage</a> &gt; <a href="index.source.html" class="el_package">com.svvt.CodeCoverage</a> &gt; <span class="el_source">TicketingSystemDeepSeek.java</span></div><h1>TicketingSystemDeepSeek.java</h1><pre class="source lang-java linenums">package com.svvt.CodeCoverage;
+
+import java.util.ArrayList;
+import java.util.List;
+
+class Ticket {
+	public String passengerName;
+    public String destination;
+    public String dateOfTravel;
+
+<span class="fc" id="L11">    public Ticket(String passengerName, String destination, String dateOfTravel) {</span>
+<span class="fc" id="L12">        this.passengerName = passengerName;</span>
+<span class="fc" id="L13">        this.destination = destination;</span>
+<span class="fc" id="L14">        this.dateOfTravel = dateOfTravel;</span>
+<span class="fc" id="L15">    }</span>
+
+    public String getPassengerName() {
+<span class="fc" id="L18">        return passengerName;</span>
+    }
+
+    public String getDestination() {
+<span class="fc" id="L22">        return destination;</span>
+    }
+
+    public String getDateOfTravel() {
+<span class="fc" id="L26">        return dateOfTravel;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L31">        return &quot;Passenger: &quot; + passengerName + &quot;, Destination: &quot; + destination + &quot;, Date of Travel: &quot; + dateOfTravel;</span>
+    }
+}
+
+public class TicketingSystemDeepSeek {
+    private List&lt;Ticket&gt; tickets;
+
+<span class="fc" id="L38">    public TicketingSystemDeepSeek() {</span>
+<span class="fc" id="L39">        this.tickets = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L40">    }</span>
+
+    public void bookTicket(String passengerName, String destination, String dateOfTravel) {
+<span class="fc" id="L43">        Ticket ticket = new Ticket(passengerName, destination, dateOfTravel);</span>
+<span class="fc" id="L44">        tickets.add(ticket);</span>
+<span class="fc" id="L45">        System.out.println(&quot;Ticket booked successfully: &quot; + ticket);</span>
+<span class="fc" id="L46">    }</span>
+
+    public List&lt;Ticket&gt; viewTickets() {
+<span class="fc" id="L49">        return tickets;</span>
+    }
+
+    public void cancelTicket(String passengerName, String destination, String dateOfTravel) {
+<span class="fc" id="L53">        Ticket ticketToRemove = null;</span>
+<span class="pc bpc" id="L54" title="1 of 2 branches missed.">        for (Ticket ticket : tickets) {</span>
+<span class="pc bpc" id="L55" title="1 of 2 branches missed.">            if (ticket.getPassengerName().equals(passengerName)</span>
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">                    &amp;&amp; ticket.getDestination().equals(destination)</span>
+<span class="pc bpc" id="L57" title="1 of 2 branches missed.">                    &amp;&amp; ticket.getDateOfTravel().equals(dateOfTravel)) {</span>
+<span class="fc" id="L58">                ticketToRemove = ticket;</span>
+<span class="fc" id="L59">                break;</span>
+            }
+<span class="nc" id="L61">        }</span>
+<span class="pc bpc" id="L62" title="1 of 2 branches missed.">        if (ticketToRemove != null) {</span>
+<span class="fc" id="L63">            tickets.remove(ticketToRemove);</span>
+<span class="fc" id="L64">            System.out.println(&quot;Ticket cancelled successfully: &quot; + ticketToRemove);</span>
+        } else {
+<span class="nc" id="L66">            System.out.println(&quot;Ticket not found.&quot;);</span>
+        }
+<span class="fc" id="L68">    }</span>
+
+    public void changeDateOfTravel(String passengerName, String destination, String currentDate, String newDate) {
+<span class="fc" id="L71">        Ticket ticketToChange = null;</span>
+<span class="pc bpc" id="L72" title="1 of 2 branches missed.">        for (Ticket ticket : tickets) {</span>
+<span class="pc bpc" id="L73" title="1 of 2 branches missed.">            if (ticket.getPassengerName().equals(passengerName)</span>
+<span class="pc bpc" id="L74" title="1 of 2 branches missed.">                    &amp;&amp; ticket.getDestination().equals(destination)</span>
+<span class="pc bpc" id="L75" title="1 of 2 branches missed.">                    &amp;&amp; ticket.getDateOfTravel().equals(currentDate)) {</span>
+<span class="fc" id="L76">                ticketToChange = ticket;</span>
+<span class="fc" id="L77">                break;</span>
+            }
+<span class="nc" id="L79">        }</span>
+<span class="pc bpc" id="L80" title="1 of 2 branches missed.">        if (ticketToChange != null) {</span>
+<span class="fc" id="L81">            ticketToChange.dateOfTravel = newDate;</span>
+<span class="fc" id="L82">            System.out.println(&quot;Date of travel changed successfully for ticket: &quot; + ticketToChange);</span>
+        } else {
+<span class="nc" id="L84">            System.out.println(&quot;Ticket not found.&quot;);</span>
+        }
+<span class="fc" id="L86">    }</span>
+}
+
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EightQueenDeepSeek.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">CodeCoverage</a> &gt; <a href="index.source.html" class="el_package">com.svvt.CodeCoverage</a> &gt; <span class="el_source">EightQueenDeepSeek.java</span></div><h1>EightQueenDeepSeek.java</h1><pre class="source lang-java linenums">package com.svvt.CodeCoverage;
+
+import java.util.Arrays;
+import java.util.ArrayList;
+
+<span class="pc bpc" id="L6" title="1 of 2 branches missed.">public class EightQueenDeepSeek {</span>
+
+	public  boolean queensAreSafe(char[][] board) {
+<span class="fc" id="L9">		char[] validChars = { 'q', '.' };</span>
+<span class="pc bpc" id="L10" title="2 of 10 branches missed.">		assert (board != null) &amp;&amp; (board.length &gt; 0) &amp;&amp; isSquare(board) &amp;&amp; onlyContains(board, validChars)</span>
+				: &quot;Violation of precondition: queensAreSafe&quot;;
+
+<span class="fc" id="L13">		return true;</span>
+	}
+
+	public  ArrayList&lt;char[][]&gt; getAllNQueens(int size) {
+<span class="nc" id="L17">		ArrayList&lt;char[][]&gt; solutions = new ArrayList&lt;char[][]&gt;();</span>
+<span class="nc" id="L18">		char[][] board = blankBoard(size);</span>
+<span class="nc" id="L19">		solveAllNQueens(board, 0, solutions);</span>
+<span class="nc" id="L20">		return solutions;</span>
+	}
+
+	public  void solveAllNQueens(char[][] board, int col, ArrayList&lt;char[][]&gt; solutions) {
+		// am I done? if so, add this solution to the ArrayList of solutions
+<span class="nc bnc" id="L25" title="All 2 branches missed.">		if (col == board.length) {</span>
+<span class="nc" id="L26">			solutions.add(makeCopy(board));</span>
+			// all done
+		} else {
+<span class="nc bnc" id="L29" title="All 2 branches missed.">			for (int row = 0; row &lt; board.length; row++) {</span>
+				// place queen
+<span class="nc" id="L31">				board[row][col] = 'q';</span>
+<span class="nc bnc" id="L32" title="All 2 branches missed.">				if (queensAreSafe(board))</span>
+					// if safe go on to next column
+<span class="nc" id="L34">					solveAllNQueens(board, col + 1, solutions);</span>
+<span class="nc" id="L35">				board[row][col] = '.';</span>
+			}
+		}
+<span class="nc" id="L38">	}</span>
+
+	// pre: mat != null, mat is rectangular
+	public  char[][] makeCopy(char[][] mat) {
+<span class="nc bnc" id="L42" title="All 4 branches missed.">		assert mat != null;</span>
+<span class="nc" id="L43">		char[][] copy = new char[mat.length][mat[0].length];</span>
+<span class="nc bnc" id="L44" title="All 2 branches missed.">		for (int r = 0; r &lt; mat.length; r++)</span>
+<span class="nc bnc" id="L45" title="All 2 branches missed.">			for (int c = 0; c &lt; mat[0].length; c++)</span>
+<span class="nc" id="L46">				copy[r][c] = mat[r][c];</span>
+<span class="nc" id="L47">		return copy;</span>
+	}
+
+	public  void printBoard(char[][] board) {
+<span class="nc bnc" id="L51" title="All 2 branches missed.">		for (int r = 0; r &lt; board.length; r++) {</span>
+<span class="nc bnc" id="L52" title="All 2 branches missed.">			for (int c = 0; c &lt; board[r].length; c++)</span>
+<span class="nc" id="L53">				System.out.print(board[r][c]);</span>
+<span class="nc" id="L54">			System.out.println();</span>
+		}
+<span class="nc" id="L56">	}</span>
+
+	public  void solveNQueens(int n) {
+<span class="nc" id="L59">		char[][] board = blankBoard(n);</span>
+		// start in column 0
+<span class="nc" id="L61">		boolean solved = canSolve(board, 0);</span>
+<span class="nc bnc" id="L62" title="All 2 branches missed.">		if (solved) {</span>
+<span class="nc" id="L63">			System.out.println(&quot;Solved the &quot; + n + &quot; queen problem.&quot;);</span>
+<span class="nc" id="L64">			printBoard(board);</span>
+		} else
+<span class="nc" id="L66">			System.out.println(&quot;Can't solve the &quot; + n + &quot; queen problem.&quot;);</span>
+<span class="nc" id="L67">	}</span>
+
+	public  boolean canSolve(char[][] board, int col) {
+
+		// know when you are done!
+<span class="nc bnc" id="L72" title="All 2 branches missed.">		if (col == board.length)</span>
+<span class="nc" id="L73">			return true; // solved!!!!!</span>
+
+		// not done, try all the rows
+<span class="nc" id="L76">		boolean solved = false;</span>
+<span class="nc bnc" id="L77" title="All 4 branches missed.">		for (int row = 0; row &lt; board.length &amp;&amp; !solved; row++) {</span>
+			// System.out.println(row + &quot; &quot; + col);
+			// place queen
+<span class="nc" id="L80">			board[row][col] = 'q';</span>
+<span class="nc bnc" id="L81" title="All 2 branches missed.">			if (queensAreSafe(board))</span>
+<span class="nc" id="L82">				solved = canSolve(board, col + 1);</span>
+<span class="nc bnc" id="L83" title="All 2 branches missed.">			if (!solved)</span>
+<span class="nc" id="L84">				board[row][col] = '.';</span>
+		}
+<span class="nc" id="L86">		return solved; // could be true(solved) or false(not solved)!!</span>
+	}
+
+	private  char[][] blankBoard(int size) {
+<span class="nc" id="L90">		char[][] result = new char[size][size];</span>
+<span class="nc bnc" id="L91" title="All 2 branches missed.">		for (int r = 0; r &lt; size; r++)</span>
+<span class="nc" id="L92">			Arrays.fill(result[r], '.');</span>
+<span class="nc" id="L93">		return result;</span>
+	}
+
+	private  boolean inbounds(int row, int col, char[][] mat) {
+<span class="nc bnc" id="L97" title="All 8 branches missed.">		return row &gt;= 0 &amp;&amp; row &lt; mat.length &amp;&amp; col &gt;= 0 &amp;&amp; col &lt; mat[0].length;</span>
+	}
+
+	/*
+	 * pre: mat != null post: return true if mat is a square matrix, false otherwise
+	 */
+	private  boolean isSquare(char[][] mat) {
+<span class="pc bpc" id="L104" title="2 of 4 branches missed.">		assert mat != null : &quot;Violation of precondition: isSquare&quot;;</span>
+
+<span class="fc" id="L106">		final int numRows = mat.length;</span>
+<span class="fc" id="L107">		int row = 0;</span>
+<span class="fc" id="L108">		boolean square = true;</span>
+<span class="fc bfc" id="L109" title="All 4 branches covered.">		while (square &amp;&amp; row &lt; numRows) {</span>
+<span class="pc bpc" id="L110" title="1 of 4 branches missed.">			square = (mat[row] != null) &amp;&amp; (mat[row].length == numRows);</span>
+<span class="fc" id="L111">			row++;</span>
+		}
+<span class="fc" id="L113">		return square;</span>
+	}
+
+	/*
+	 * pre: mat != null, valid != null post: return true if all elements in mat are
+	 * one of the characters in valid
+	 */
+	private  boolean onlyContains(char[][] mat, char[] valid) {
+<span class="pc bpc" id="L121" title="3 of 6 branches missed.">		assert mat != null &amp;&amp; valid != null : &quot;Violation of precondition: onlyContains&quot;;</span>
+
+<span class="fc" id="L123">		int row = 0;</span>
+		int col;
+<span class="fc" id="L125">		boolean correct = true;</span>
+<span class="fc bfc" id="L126" title="All 4 branches covered.">		while (correct &amp;&amp; row &lt; mat.length) {</span>
+<span class="fc" id="L127">			col = 0;</span>
+<span class="fc bfc" id="L128" title="All 4 branches covered.">			while (correct &amp;&amp; col &lt; mat[row].length) {</span>
+<span class="fc" id="L129">				correct = contains(valid, mat[row][col]);</span>
+<span class="fc" id="L130">				col++;</span>
+			}
+<span class="fc" id="L132">			row++;</span>
+		}
+<span class="fc" id="L134">		return correct;</span>
+	}
+
+	/*
+	 * pre: list != null post: return true if c is in list
+	 */
+	private  boolean contains(char[] list, char c) {
+<span class="pc bpc" id="L141" title="2 of 4 branches missed.">		assert (list != null) : &quot;Violation of precondition: contains&quot;;</span>
+
+<span class="fc" id="L143">		boolean found = false;</span>
+<span class="fc" id="L144">		int index = 0;</span>
+<span class="fc bfc" id="L145" title="All 4 branches covered.">		while (!found &amp;&amp; index &lt; list.length) {</span>
+<span class="fc bfc" id="L146" title="All 2 branches covered.">			found = list[index] == c;</span>
+<span class="fc" id="L147">			index++;</span>
+		}
+<span class="fc" id="L149">		return found;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>
